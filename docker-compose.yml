@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  mysql:
+    build:
+      context: ./sql
+    volumes:
+      - ./www/data:/var/lib/mysql
+    networks:
+      - my-network
+
+  php:
+    build:
+      context: ./php
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+    networks:
+      - my-network
+
+
+networks:
+  my-network:
+
